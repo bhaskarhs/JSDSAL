@@ -4,9 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .productView-descriptiont p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 3 !important;
+        font-size: 30px;
+      }
+
+      article.productView-description.clamp-text-open {
+        -webkit-line-clamp: unset !important;
+      }
+      article.productView-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 3 !important;
+        font-size: 30px;
+      }
+    </style>
   </head>
   <body>
     <h1>DSA</h1>
-    <script src="./objects.js"></script>
+    <article
+      class="productView-description m-web-description productView-description-max-height-144px"
+      style="width: 50%"
+    >
+      <p>
+        Please note, combining a paragraph and an unordered list in one
+        container and applying line clamping could lead to slightly inconsistent
+        behavior due to the nature of text and lists. The line clamping might
+        affect the content differently based on their structure. Please note,
+        combining a paragraph and an unordered list in one container and
+        applying line clamping could lead to slightly inconsistent behavior due
+        to the nature of text and lists. The line clamping might affect the
+        content differently based on their structure.
+      </p>
+      <!-- <ul>
+          <li>Some text</li>
+          <li>Some text</li>
+          <li>Some text</li>
+        </ul> -->
+    </article>
+
+    <button class="read-more-button" style="display: none">Read more</button>
+
+    <button onclick="increment()">incremtn</button>
+    <button onclick="undo()">undo</button>
+    <button onclick="redo()">redo</button>
+    <input type="text" name="" id="val" value="0" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const description = document.querySelector(".productView-description");
+        const button = document.querySelector(".read-more-button");
+
+        // Compare offsetHeight to determine if the content exceeds the container's height
+        if (description.offsetHeight < description.scrollHeight) {
+          button.style.display = "block";
+
+          $(button).on("click", function () {
+            $(description).toggleClass("clamp-text-open");
+            if ($(description).hasClass("clamp-text-open")) {
+              button.textContent = "Read less";
+            } else {
+              button.textContent = "Read more";
+            }
+          });
+        }
+      });
+    </script>
+
+    <!-- <script src="./queue/nodeQueue.js"></script> -->
+    <script src="./queue/index.js"></script>
   </body>
 </html>
